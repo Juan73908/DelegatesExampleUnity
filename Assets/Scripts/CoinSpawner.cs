@@ -10,7 +10,7 @@ public class CoinSpawner : MonoBehaviour {
 	// The number of prefabs we will have at all time
 	public int prefabsCount = 1;
 
-	// Delegates to notify
+	// Delegates to notify the UI
 	public delegate void OnSpawn();
 	public event OnSpawn onSpawn;
 
@@ -28,11 +28,11 @@ public class CoinSpawner : MonoBehaviour {
 		// Subscribe so the other class handles notification automatically
 		newCoin.onDied += OnCoinDied;
 
-		// Notify if anyone is listening
+		// Notify if any UI is listening
 		if (onSpawn != null)
 			onSpawn();
 	}
-	
+
 	// Function that will be called automatically when the coin dies
 	public void OnCoinDied (CoinController coinController){
 		// We unsubscribe to avoid memory leaks

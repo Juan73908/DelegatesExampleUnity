@@ -19,7 +19,7 @@ public class CoinController : MonoBehaviour {
 	// Called automatically thanks to MonoBehaviour
 	void Start () {
 		// Automatic destroy after random time
-		Destroy (gameObject, Random.Range(minLifeTime, maxLifeTime));
+		Invoke ("Died", Random.Range(minLifeTime, maxLifeTime));
 
 		Rigidbody2D myRigidbody = GetComponent<Rigidbody2D>();
 		// Apply random force if possible
@@ -31,10 +31,13 @@ public class CoinController : MonoBehaviour {
 		}
 	}
 
-	// Called automatically thanks to MonoBehaviour
-	void OnDestroy () {
+	// Called automatically when time is up thanks to Invoke
+	void Died () {
 		// Notify if anyone is listening
 		if (onDied != null)
 			onDied(this);
+
+		// Destroy self
+		Destroy(gameObject);
 	}
 }
